@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Simple Calculator</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 40px; }
+input[type=number] { width: 80px; }
+#result { margin-top: 10px; font-weight: bold; }
+</style>
+</head>
+<body>
+<h1>Simple Calculator</h1>
+<p>
+  <input id="num1" type="number" step="any">
+  <select id="op">
+    <option value="+">+</option>
+    <option value="-">-</option>
+    <option value="*">*</option>
+    <option value="/">/</option>
+  </select>
+  <input id="num2" type="number" step="any">
+  <button id="calc">Calculate</button>
+</p>
+<p id="result"></p>
+<script>
+  document.getElementById('calc').addEventListener('click', function() {
+    var a = parseFloat(document.getElementById('num1').value);
+    var b = parseFloat(document.getElementById('num2').value);
+    var op = document.getElementById('op').value;
+    if (isNaN(a) || isNaN(b)) {
+      document.getElementById('result').textContent = 'Please enter two numbers';
+      return;
+    }
+    var res;
+    switch(op) {
+      case '+': res = a + b; break;
+      case '-': res = a - b; break;
+      case '*': res = a * b; break;
+      case '/':
+        if (b === 0) {
+          document.getElementById('result').textContent = 'Cannot divide by zero';
+          return;
+        }
+        res = a / b; break;
+      default:
+        document.getElementById('result').textContent = 'Unknown operation';
+        return;
+    }
+    document.getElementById('result').textContent = 'Result: ' + res;
+  });
+</script>
+</body>
+</html>
